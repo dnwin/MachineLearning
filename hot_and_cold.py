@@ -12,12 +12,6 @@ def main():
     knob_weight = 0.5
 
     for _ in range(10000):
-        prediction = knob_weight * INPUT_VALUE
-
-        error = (GOAL_PREDICTION - prediction) ** 2
-
-        print("Error:" + str(error) + " Prediction:" + str(prediction))
-
         up_prediction = (knob_weight + STEP_AMOUNT) * INPUT_VALUE
         up_error = (GOAL_PREDICTION - up_prediction) ** 2
 
@@ -26,9 +20,10 @@ def main():
 
         if down_error < up_error:
             knob_weight = knob_weight - STEP_AMOUNT
-
-        if down_error > up_error:
+            print("Error:" + str(down_error) + " Prediction:" + str(down_prediction))
+        elif down_error > up_error:
             knob_weight = knob_weight + STEP_AMOUNT
+            print("Error:" + str(up_error) + " Prediction:" + str(up_prediction))
 
 if __name__ == "__main__":
     main()
